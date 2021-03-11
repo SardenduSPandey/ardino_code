@@ -1,34 +1,35 @@
-#include <WiFi.h>
+#include <WiFi.h>           
 #include <Wire.h> 
-#include "SSD1306Wire.h"
+#include "SSD1306Wire.h"        //Library for Oled Dispaly  
 
+//Wifi Connectivity code
 #define WIFI_SSID "iot"
 #define WIFI_PASSWORD "12345678"
 
-SSD1306Wire  display(0x3c, 21, 22);
+SSD1306Wire  display(0x3c, 21, 22);      //(adderss , pinMode 1 , pinMode 2)
 void setup() {
   Serial.begin(9600);
   display.init();
   display.flipScreenVertically();
-  display.setFont(ArialMT_Plain_16);
-  display.drawString(0, 0, "IOT BASED");
+  display.setFont(ArialMT_Plain_16);        //(font_style_fontsize)
+  display.drawString(0, 0, "IOT BASED");    //(x-axis , y-axis , "Message")
   display.setFont(ArialMT_Plain_16);
   display.drawString(0, 16, "CROP");
   display.setFont(ArialMT_Plain_16);
   display.drawString(0, 46, "MONITORING");
-  display.display();
+  display.display();                          //only after this satement message will be displayed
   delay(5000);
-  display.clear();
+  display.clear();                            //before new message you have clear the screen
   display.flipScreenVertically();
   display.setFont(ArialMT_Plain_16);
-  display.drawString(0, 0, "Connecting");
+  display.drawString(0, 0, "Connecting");     
   display.setFont(ArialMT_Plain_16);
   display.drawString(0, 16, "to ");
   display.setFont(ArialMT_Plain_16);
   display.drawString(0, 46, "Internet");
-  display.display();
+  display.display();                           
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Connecting to Wi-Fi");
+  Serial.print("Connecting to Wi-Fi");           
   while (WiFi.status() != WL_CONNECTED)
   {
     Serial.print(".");
